@@ -1,0 +1,64 @@
+
+<html>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+   <head>
+      <title>PHP and MariaDB</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+ 
+	<script src="https://www.google.com/recaptcha/api.js?render=6LfLH-8UAAAAAGOagY9Fm1QLTsICQ-ijJy8pS9Iq"></script>
+   </head>
+  
+   
+  
+  
+  
+  <body>
+    <h1>Új szalag felkötése</h1>
+  
+   <form id="comment_form" action="form.php" method="post" >
+      <input type="email" name="email" placeholder="Type your email" size="40"><br><br>
+      <textarea id="comment" name="comment" rows="8" cols="39"></textarea><br><br>
+	 
+      <input type="submit" name="submit" value="Küld"><br><br>
+    </form>
+      <script>
+       // when form is submit
+    $('#comment_form').submit(function() {
+        // we stoped it
+        event.preventDefault();
+        var email = $('#email').val();
+        var comment = $("#comment").val();
+        // needs for recaptacha ready
+        grecaptcha.ready(function() {
+            // do request for recaptcha token
+            // response is promise with passed token
+            grecaptcha.execute('6LfLH-8UAAAAAGOagY9Fm1QLTsICQ-ijJy8pS9Iq', {action: 'social'}).then(function(token) {
+                // add token to form
+                $('#comment_form').prepend('<input type="hidden" name="g-recaptcha-response" value="' + token + '">');
+                    $.post("form.php",{email: email, comment: comment, token: token}, function(result) {
+                            console.log(result);
+                            if(result.success) {
+                                    alert('Thanks for posting comment.')
+                            } else {
+                                    alert('You are spammer ! Get the @$%K out.')
+                            }
+                    });
+            });;
+        });
+  });
+  </script>
+<script >
+$.getJSON( "form.php?f=regi", function( data ) {
+  var items = [];
+  $.each( data, function( key, val ) {
+    items.push( "<li id='" + key + "'>" + val.leiras + "</li>" );
+  });
+ 
+  $( "<ul/>", {
+    "class": "my-new-list",
+    html: items.join( "" )
+  }).appendTo( "body" );
+});
+   </script>
+   </body>
+</html>
