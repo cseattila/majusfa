@@ -21,7 +21,19 @@
 	 
       <input type="submit" name="submit" value="Küld"><br><br>
     </form>
+	
+	<div id="kivansagList">
+	</div>
       <script>
+function updateKivansagList (){
+$.getJSON( "form.php?f=regi", function( data ) {
+  var items = [];
+  $.each( data, function( key, val ) {
+    items.push( "<li id='" + key + "'>" + val.leiras + "</li>" );
+  });
+    $('#kivansagList').html(items);
+});
+}
        // when form is submit
     $('#comment_form').submit(function() {
         // we stoped it
@@ -38,7 +50,8 @@
                     $.post("form.php",{email: email, comment: comment, token: token}, function(result) {
                             console.log(result);
                             if(result.success) {
-                                    alert('Thanks for posting comment.')
+                                    alert('Köszönjük jó kinváságod');
+						updateKivansagList();			
                             } else {
                                     alert('You are spammer ! Get the @$%K out.')
                             }
@@ -46,19 +59,7 @@
             });;
         });
   });
+  updateKivansagList();
   </script>
-<script >
-$.getJSON( "form.php?f=regi", function( data ) {
-  var items = [];
-  $.each( data, function( key, val ) {
-    items.push( "<li id='" + key + "'>" + val.leiras + "</li>" );
-  });
- 
-  $( "<ul/>", {
-    "class": "my-new-list",
-    html: items.join( "" )
-  }).appendTo( "body" );
-});
-   </script>
    </body>
 </html>
