@@ -377,8 +377,10 @@ background-repeat: no-repeat;
        background-position: 0px 0px;
 	   background-size: 300px 30px;
 	   vertical-align:bottom;
-	       margin-top: 855px;
+	       margin-top: 0px;
     margin-left: 150px;
+	position:absolute;
+	top:925px;
 }
 }
 	</style>
@@ -396,11 +398,11 @@ background-repeat: no-repeat;
   <div id="kozep">
 	<div id="container">
 		<div id = "fa" > 
-			<div id= "logo"></div>
-			</div>
-	
+			
+	<div id= "logo"></div>
 		</div>
 		
+			</div>
 		<div id="eszkozok">
 				<div id="szalagNezo"></div>
 				
@@ -448,14 +450,14 @@ $.getJSON( "http://www.muzeum.mako.hu/majusfa/form.php?f=regi", function( data )
 kivansagok = data;
   var items = [];
   $.each( data, function( key, val ) {
-    items.push( "<div  style='transform : perspective(500px) translate3d(" 
+    items+= "<div  style='transform : perspective(500px) translate3d(" 
 	                + val.x + "px, " + val.y + "px, 0);    class='szalag' id='level" + val.id +
 					"' onClick='clickSzalag("+val.id
 					+")' > <div   class=\"flag\" > <div  style='background-color: #"+val.szin
 					+";' >" 
-					+ tirmText(val.leiras) + "</div><div class=\"flag-wave\"></div></div></div>" );
+					+ tirmText(val.leiras) + "</div><div class=\"flag-wave\"></div></div></div>" ;
   });
-    $('#fa').html(items);
+    $('#fa').html(items+"<div id= \"logo\"></div>");
 });
 }
        // when form is submit
