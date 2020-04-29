@@ -69,7 +69,7 @@ srand(make_seed());
 	 $commentP=$comment;
 	 $szerzo=$email;
 	 $X=rand ( 100 , 500 ) ;
-	  $Y=rand ( 20 , 600 ) ;
+	  $Y=rand ( 20 , 430 ) ;
 	  $szin=getRendomPastelColour();
 	$stmt->execute();
 
