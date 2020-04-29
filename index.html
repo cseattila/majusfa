@@ -2,36 +2,442 @@
 <html>
 <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
    <head>
-      <title>PHP and MariaDB</title>
+      <title>Makói Május fa</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
  
 	<script src="https://www.google.com/recaptcha/api.js?render=6LfLH-8UAAAAAGOagY9Fm1QLTsICQ-ijJy8pS9Iq"></script>
-   </head>
+ 
+
+<style>
+    #kivansagList{
+	display:none;
+	}
+	
+    #container {
+		width: 650px;
+		height: 921px;
+		background-image: url('hatter.jpg');
+		background-color: #556;
+		display: inline-block;
+		align-items: left;
+		justify-content: left;
+		overflow: hidden;
+		border-radius: 7px;
+		
+		left: 0;
+		right: 0;
+		z-index: 9999;
+		background-position: center;
+    }
+	
+	#eszkozok{
+		background-color: #fff;
+		display: inline-block;
+		align-items: left;
+		justify-content: left;
+		overflow: hidden;
+		border-radius: 7px;
+		width: 450px;
+		left: 0;
+		right: 0;
+		z-index: 9999;
+		background-position: center;
+    
+	}
+	
+	 .szalag {
+      width: 120px;
+      height: 20px;
+      background-repeat: no-repeat;
+	  background-image: url('szalag.png');
+      background-position: 0px 0px;
+      touch-action: none;
+      user-select: none;
+	
+	  position: absolute;
+    }
+	
+	#fa {
+	display:inline-block;
+	  width: 614px;
+      height:914px;
+	  margin:7px 25px; 
+      order:2;
+      border-radius: 7px;
+   
+     
+      user-select: none;
+	
+	  
+       background-repeat: no-repeat;
+	   background-image: url('fa.png');
+       background-position: 0px 0px;
+	   
+    }
+	
+	#foCim{
+	font-size:32pt;
+
+	width:420px;
+	font-family:"Lucida Calligraphy";
+	color:#1C762F;
+	margin:auto;
+	}
+	
+	#outerContainer {
+	width :100%;
+	  align-items: center;
+	  justify-content: center;
+	  background-color:#FFDBB7;
+ 	}
+	
+	#szalagNezo {
+	  width: 85%;
+      height:114px;
+	  margin:5px 5px; 
+      order:2;
+      border-radius: 7px;
+   padding:20px;
+     background-color:#AFDBA7;
+      user-select: none;
+	
+	  
+    
+	}
+	#uj_szalag{
+	  align-items: center;
+	  border-radius: 7px;
+      justify-content: center;
+	background-color:#A0DBB7;
+	margin:5px;
+	width: 85%;
+      border-radius: 7px;
+    user-select: none;
+	background-repeat: no-repeat;
+	padding:20px;
+    background-position: 0px 0px;
+	}
+	#comment_form{
+	margin:7px 25px; 
+	}
+	
+	#kozep {
+	
+	}
+	
+	.kivan_display{
+	  width: 90%;
+	  margin: 15px 5px;
+	  border-radius: 7px;
+	  background-color:#A0ABB7;
+	
+	}
+	.szero_display{
+	  width: 90%;
+	  margin:15px 5px;
+	  border-radius: 7px;
+	  background-color:#A09BB7;
+	
+	}
+	
+	
+	
+	
+	@colorRed: rgb(200,0,0); 
+@colorBlueUs: rgb(63, 60, 110);
+@colorBlue: rgb(0, 49, 156);
+@flagSize: 220px;
+
+
+
+.ground {
+    background-image: 
+linear-gradient( white 50%, #eee);
+ padding-bottom: 20px;
+}
+.flag {
+  position: relative;
+  display: inline-block;
+  margin: 2em 3em @flagSize;
+	width: @flagSize;
+	height: @flagSize;
+	border: 1px solid #bbb;
+  	border-left-color: white;
+  box-sizing: border-box;
+	box-shadow: 2px 5px 14px 0px rgba(0,0,0,0.4);
+  -webkit-backface-visibility: hidden;
+  -webkit-perspective: 1000;
+  -webkit-transform-style: preserve3d;
+  -webkit-transform-origin: 0 250px;
+  -webkit-transform: translate3d(0, 0, 0) rotateZ(5deg) rotateY(-22deg);
+
+	-webkit-animation-name: wave;
+	-webkit-animation-duration: 8s;
+	-webkit-animation-timing-function: cubic-bezier(.16,.14,.82,.73);
+  	-webkit-animation-timing-function: linear;
+	-webkit-animation-iteration-count: infinite;
+  
+  &:nth-child(odd) {
+   -webkit-animation-delay: 1s;
+  }
+  
+  &:before {
+  position: absolute;
+  content: "";
+   height: @flagSize*2;
+  left: -5px;
+  top: -3px;
+  width: 6px;
+  border-right: 1px solid white;
+  border-radius: 3px;
+  background-color: #444;
+  box-shadow: -3px 3px 8px 0px rgba(0,0,0,0.4);
+}
+  
+  &.rect {
+  	width: @flagSize*1.4;
+  
+  }  
+}
+
+.flag-pattern {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;  
+    -webkit-box-reflect: below 60px -webkit-gradient(linear,left top,left bottom,from(transparent),color-stop(70%,transparent),to(rgba(255,255,255,0.05)));
+  
+    &.ch {
+      border: 15px solid @colorRed;
+      background-color: @colorRed;
+background-image: 
+linear-gradient(90deg, white 50%, transparent 50%),
+linear-gradient(white 50%, transparent 50%);
+      background-size: @flagSize/2 @flagSize/2;
+      background-position: 100% 100%;
+  }
+  
+  &.fr {
+     background-color: @colorRed;
+    background-image: 
+linear-gradient( 90deg, @colorBlue 33.3%, transparent 33.3%),
+linear-gradient(90deg, white 66.6%, transparent 66.6%);
+  }
+  
+ 	&.us {
+		background-color: @colorRed;
+		background-image: linear-gradient(@colorRed 50%, white 50%);
+		background-size: 100% 15.38%;
+		background-repeat: repeat-y;
+
+
+		&:before, &:after {
+			position: absolute;
+			max-width: 52%;
+			overflow: hidden;
+			word-break: break-word;
+			text-align: center;
+			font-size: 7px;
+			color: white;
+			line-height: 1.9em;
+			letter-spacing: 1em;
+		}
+		&:before {
+			content: "\2605 \2605 \2605 \2605 \2605 \2605 \2605 \2605 \2605 \2605 \2605 \2605 \2605 \2605 \2605 \2605 \2605 \2605 \2605 \2605 \2605 \2605 \2605 \2605 \2605 \2605 \2605 \2605 \2605 \2605 ";
+			background-color: @colorBlueUs;
+			border-left: 3px solid @colorBlueUs;
+		}
+
+		&:after {
+			content: "\2605 \2605 \2605 \2605 \2605 \2605 \2605 \2605 \2605 \2605 \2605 \2605 \2605 \2605 \2605 \2605 \2605 \2605 \2605 \2605 ";
+			box-sizing: border-box;
+			margin-left: 3px;
+			padding: .9em 1em;
+		}
+	}
+    
+  &.pl {
+     background-color: @colorRed;
+    background-image: 
+linear-gradient( white 50%, transparent 50%);
+  }
+  
+  &.de {
+     background-color: gold;
+    background-image: 
+linear-gradient( black 33.3%, transparent 33.3%),
+linear-gradient(red 66.6%, transparent 66.6%);
+  }
+  
+    &.ru {
+     background-color: red;
+    background-image: 
+linear-gradient( blue 33.3%, transparent 33.3%),
+linear-gradient(white 66.6%, transparent 66.6%);
+  }
+  
+    &.jp {
+     background-color: white;
+    background-image: 
+radial-gradient(circle, @colorRed 40%, transparent 0);
+
+  }
+}
+
+.flag-wave {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+
+	background-image:
+		-webkit-gradient(
+			linear,
+			0 -25%,
+			100% top,
+			color-stop(0%,rgba(255,255,255,0)),
+			color-stop(20%,rgba(255,255,255,0)),
+      color-stop(30%,rgba(0,0,0,.04)),
+			color-stop(40%,rgba(255,255,255,.2)),
+      color-stop(60%,rgba(255,255,255,0)),
+    	color-stop(65%,rgba(255,255,255,.2)),
+			color-stop(80%,rgba(0,0,0,.05)),
+			color-stop(100%,rgba(255,255,255,0)));
+
+	background-size: 200%;
+  
+	-webkit-animation-name: flutter;
+	-webkit-animation-duration: 8s;
+	-webkit-animation-timing-function: cubic-bezier(.16,.14,.82,.73);
+	-webkit-animation-iteration-count: infinite;
+}
+
+
+@-webkit-keyframes flutter {
+
+	0% {
+		background-position: -200% 0px;
+	}
+
+  30% {
+		background-position: -60% 5px;
+	}
+  
+   70% {
+		background-position: 70% -5px;
+	}
+  
+	100% {
+		background-position: 200% 0px;
+	}
+}
+
+@-webkit-keyframes wave {
+
+	0% {
+		box-shadow: 4px 5px 5px 0 rgba(0,0,0,0.1);
+        -webkit-transform: translate3d(0, 0, 0) rotateZ(5deg) rotateY(22deg);
+
+	}
+
+	20% {
+		box-shadow: 4px 5px 15px 0 rgba(0,0,0,0.1);
+     -webkit-transform: translate3d(0, 0, 0) rotateZ(5deg) rotateY(0deg);
+	}
+
+  40% {
+		box-shadow: 4px 5px 20px 0 rgba(0,0,0,0.4);
+   -webkit-transform: translate3d(0, 0, 0) rotateZ(6deg) rotateY(-22deg);
+	}
+  
+  	60% {
+		box-shadow: 4px 5px 5px 0 rgba(0,0,0,0.1);
+     -webkit-transform: translate3d(0, 0, 0) rotateZ(5deg) rotateY(0deg);
+	}
+
+  80% {
+		box-shadow: 4px 5px 5px 0 rgba(0,0,0,0.3);
+   -webkit-transform: translate3d(0, 0, 0) rotateZ(5deg) rotateY(16deg);
+	}
+  
+	100% {
+		box-shadow: 4px 5px 5px 0 rgba(0,0,0,0.1);
+   -webkit-transform: translate3d(0, 0, 0) rotateZ(5deg) rotateY(22deg);
+	}
+}
+	</style>
+ </head>
   
    
   
   
   
   <body>
-    <h1>Új szalag felkötése</h1>
+    <div id="outerContainer">
+ 
+    <div id="foCim" ><b>Virtuális májusfa</b></div>
   
-   <form id="comment_form" action="form.php" method="post" >
-      <input type="email" name="email" placeholder="Type your email" size="40"><br><br>
-      <textarea id="comment" name="comment" rows="8" cols="39"></textarea><br><br>
-	 
-      <input type="submit" name="submit" value="Küld"><br><br>
-    </form>
+  <div id="kozep">
+	<div id="container">
+		<div id = "fa" > </div>
 	
-	<div id="kivansagList">
-	</div>
+			
+		</div>
+		
+		<div id="eszkozok">
+				<div id="szalagNezo"></div>
+				
+				<div id="uj_szalag">
+					<h1>Új szalag felkötése</h1>
+					<form id="comment_form" action="form.php" method="post" >
+				  <input type="text" id="email" name="email" placeholder="Beceneved" size="30"><br><br>
+				  <textarea id="comment" name="comment" rows="3" cols="29" placeholder="üzenet"></textarea><br><br>
+				 
+				  <input type="submit" name="submit" value="Küld"><br><br>
+					</form>
+				</div>
+			</div>
+	</div>	
+<div>
+  <div id="kivansagList"/>
+	
+	
       <script>
-function updateKivansagList (){
+	  var  kivansagok;
+	  
+	  
+	  function tirmText (  string){
+	  
+		var length = 20;
+		return trimmedString = string.length > length ? 
+                    string.substring(0, length - 3) + "..." : 
+                    string;
+	  }
+	  
+	  function clickSzalag(idKlicked){
+	  
+	  
+	  var val =  kivansagok.find(element => element.id == idKlicked);
+	  
+	   items= "<div><div class=\"kivan_display\">" +val.leiras + "</div><div class=\"szero_display\">&lt;"+val.szerzo+"&gt;</div></div>" ;
+	     $('#szalagNezo').html(items);
+	  }
+	  
+
+function updateKivansagListFa (){
 $.getJSON( "form.php?f=regi", function( data ) {
+kivansagok = data;
   var items = [];
   $.each( data, function( key, val ) {
-    items.push( "<li id='" + key + "'>" + val.leiras + "</li>" );
+    items.push( "<div  style='transform : perspective(500px) translate3d(" 
+	                + val.x + "px, " + val.y + "px, 0);    class='szalag' id='level" + val.id +
+					"' onClick='clickSzalag("+val.id
+					+")' > <div   class=\"flag\" > <div  style='background-color: #"+val.szin
+					+";' >" 
+					+ tirmText(val.leiras) + "</div><div class=\"flag-wave\"></div></div></div>" );
   });
-    $('#kivansagList').html(items);
+    $('#fa').html(items);
 });
 }
        // when form is submit
@@ -50,8 +456,8 @@ $.getJSON( "form.php?f=regi", function( data ) {
                     $.post("form.php",{email: email, comment: comment, token: token}, function(result) {
                             console.log(result);
                             if(result.success) {
-                                    alert('Köszönjük jó kinváságod');
-						updateKivansagList();			
+                                    alert('Köszönjük a jókívánságod! Legyen szép napod!');
+						updateKivansagListFa();						
                             } else {
                                     alert('You are spammer ! Get the @$%K out.')
                             }
@@ -59,7 +465,8 @@ $.getJSON( "form.php?f=regi", function( data ) {
             });;
         });
   });
-  updateKivansagList();
+  
+  updateKivansagListFa()
   </script>
    </body>
 </html>

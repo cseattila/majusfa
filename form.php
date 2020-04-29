@@ -6,7 +6,7 @@ if ($conn->connect_error) {
 function get_SzalagDaTa() {
  	global $conn;
 		
-	$sql = "SELECT leiras FROM kivansag";
+	$sql = "SELECT * FROM kivansag";
 	$sth = $conn->query($sql);
 
 
@@ -19,12 +19,23 @@ function get_SzalagDaTa() {
 ?>
 
 <?php
+	function make_seed()
+{
+  list($usec, $sec) = explode(' ', microtime());
+  return $sec + $usec * 1000000;
+}
 
   
+  function getRendomPastelColour(){
+	  return  "".dechex(rand ( 100 , 255 )).dechex(rand ( 100 , 255 )).dechex(rand ( 100 , 255 )) ;
+  }
+  
 function create_NewSzalag() {
+srand(make_seed());
+
  global $conn;
   $email;$comment;$captcha;
-  $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
+  $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_STRING);
   $comment = filter_input(INPUT_POST, 'comment', FILTER_SANITIZE_STRING);
   $captcha = filter_input(INPUT_POST, 'token', FILTER_SANITIZE_STRING);
   if(!$captcha){
@@ -53,9 +64,13 @@ function create_NewSzalag() {
   if($responseKeys["success"]) {
 	  
 	 
-	$stmt = $conn->prepare("INSERT INTO kivansag (leiras) VALUES (?)");
-	 $stmt->bind_param("s", $commentP);
+	$stmt = $conn->prepare("INSERT INTO kivansag (szerzo,leiras,x,y,szin) VALUES (?,?,?,?,?)");
+	 $stmt->bind_param("ssiis", $szerzo,$commentP,$X,$Y,$szin);
 	 $commentP=$comment;
+	 $szerzo=$email;
+	 $X=rand ( 100 , 500 ) ;
+	  $Y=rand ( 20 , 600 ) ;
+	  $szin=getRendomPastelColour();
 	$stmt->execute();
 
 	
