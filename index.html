@@ -367,6 +367,20 @@ radial-gradient(circle, @colorRed 40%, transparent 0);
    -webkit-transform: translate3d(0, 0, 0) rotateZ(5deg) rotateY(22deg);
 	}
 }
+
+
+#logo {
+width :300px;
+height :30px;
+background-repeat: no-repeat;
+	   background-image: url('logo.jpg');
+       background-position: 0px 0px;
+	   background-size: 300px 30px;
+	   vertical-align:bottom;
+	       margin-top: 855px;
+    margin-left: 150px;
+}
+}
 	</style>
  </head>
   
@@ -381,18 +395,20 @@ radial-gradient(circle, @colorRed 40%, transparent 0);
   
   <div id="kozep">
 	<div id="container">
-		<div id = "fa" > </div>
+		<div id = "fa" > 
+			<div id= "logo"></div>
+			</div>
 	
-			
 		</div>
 		
 		<div id="eszkozok">
 				<div id="szalagNezo"></div>
 				
 				<div id="uj_szalag">
-					<h1>Új szalag felkötése</h1>
-					<form id="comment_form" action="form.php" method="post" >
-				  <input type="text" id="email" name="email" placeholder="Beceneved" size="30"><br><br>
+				    <p> Oszd meg te is saját jókívánságod!</p>
+					<h2>Új szalag felkötése</h2>
+					<form id="comment_form" action="http://www.muzeum.mako.hu/majusfa/form.php" method="post" >
+				  <input type="text" id="email" name="email" placeholder="Név(nem kötelező)" size="30"><br><br>
 				  <textarea id="comment" name="comment" rows="3" cols="29" placeholder="üzenet"></textarea><br><br>
 				 
 				  <input type="submit" name="submit" value="Küld"><br><br>
@@ -423,11 +439,12 @@ radial-gradient(circle, @colorRed 40%, transparent 0);
 	  
 	   items= "<div><div class=\"kivan_display\">" +val.leiras + "</div><div class=\"szero_display\">&lt;"+val.szerzo+"&gt;</div></div>" ;
 	     $('#szalagNezo').html(items);
+		 $('#szalagNezo').css('display','block');
 	  }
 	  
 
 function updateKivansagListFa (){
-$.getJSON( "form.php?f=regi", function( data ) {
+$.getJSON( "http://www.muzeum.mako.hu/majusfa/form.php?f=regi", function( data ) {
 kivansagok = data;
   var items = [];
   $.each( data, function( key, val ) {
@@ -454,7 +471,7 @@ kivansagok = data;
             grecaptcha.execute('6LfLH-8UAAAAAGOagY9Fm1QLTsICQ-ijJy8pS9Iq', {action: 'social'}).then(function(token) {
                 // add token to form
                 $('#comment_form').prepend('<input type="hidden" name="g-recaptcha-response" value="' + token + '">');
-                    $.post("form.php",{email: email, comment: comment, token: token}, function(result) {
+                    $.post("http://www.muzeum.mako.hu/majusfa/form.php",{email: email, comment: comment, token: token}, function(result) {
                             console.log(result);
                             if(result.success) {
                                     alert('Köszönjük a jókívánságod! Legyen szép napod!');
@@ -468,6 +485,7 @@ kivansagok = data;
   });
   
   updateKivansagListFa()
+  $('#szalagNezo').css('display','none');
   </script>
    </body>
 </html>
